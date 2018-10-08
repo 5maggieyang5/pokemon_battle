@@ -14,36 +14,32 @@ const checkInput = choosedPokemons => {
 
 // ----- Get both pokemons basic infor ----- //
 
-async function getPokemonsInfor(choosedPokemons) {
+async function getPokemonsInfor(pokemonName) {
 
-  /*  pokemon#1's information  */
-  let response1  = await fetch(`${initialUrl}pokemon/${choosedPokemons[0]}`);
-  let json1      = await response1.json();
-  let pokemon1   = {};
-  pokemon1.name  = json1.name;
-  pokemon1.types = json1.types;
-  pokemon1.stats = json1.stats;
-  console.log("-----Pokemon1 Infor: ", pokemon1);
-
-  /*  pokemon#2's information  */
-  let response2  = await fetch(`${initialUrl}pokemon/${choosedPokemons[1]}`);
-  let json2      = await response2.json();
-  let pokemon2   = {};
-  pokemon2.name  = json2.name;
-  pokemon2.types = json2.types;
-  pokemon2.stats = json2.stats;
-  console.log("-----Pokemon2 Infor: ", pokemon2);
+  let response  = await fetch(`${initialUrl}pokemon/${pokemonName}`);
+  let json      = await response.json();
+  let pokemon   = {};
+  pokemon.name  = json.name;
+  pokemon.types = json.types;
+  pokemon.stats = json.stats;
 
   return {
-    pokemon1: pokemon1,
-    pokemon2: pokemon2
+    pokemon: pokemon
   }
 }
 
-getPokemonsInfor(choosedPokemons)
-  .then(result => {
-    let pokemons = [result.pokemon1, result.pokemon2];
-    console.log("-----Pokemons Infor: ", pokemons);
+let promises = [];
+choosedPokemons.map((pokemon) => {
+  promises.push(getPokemonsInfor(pokemon));
+})
+
+Promise.all(promises)
+  .then((results) => {
+    let pokemon = [];
+    for (let i = 0; i < results.length; i++) {
+      pokemon.push(results[i].pokemon)
+    }
+    console.log("-----Pokemons Infor: ", pokemon);
   })
   .catch(error => console.error(error));
 
