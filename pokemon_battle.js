@@ -70,18 +70,6 @@ async function getPokemonsDamageRelations(typeURL) {
 }
 
   // ------------------------------------------------ //
- //              Check pokemon stats                 //
-// ------------------------------------------------ //
-
-const checkTotalStats = stats => {
-  let totalStats = 0;
-  stats.forEach(stat => {
-    totalStats += stat.base_stat;
-  })
-  return totalStats;
-}
-
-  // ------------------------------------------------ //
  //             Check type of advantage              //
 // ------------------------------------------------ //
 
@@ -122,6 +110,18 @@ const typeOfAdvantage = (pokemon1Types, pokemon2Types) => {
 
   return p1 === p2 ? "no type advantage"
        : p1 > p2 ? "p1 win" : "p2 win";
+}
+
+  // ------------------------------------------------ //
+ //              Check pokemon stats                 //
+// ------------------------------------------------ //
+
+const checkTotalStats = stats => {
+  let totalStats = 0;
+  stats.forEach(stat => {
+    totalStats += stat.base_stat;
+  })
+  return totalStats;
 }
 
   // ------------------------------------------------ //
