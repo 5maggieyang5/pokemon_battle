@@ -19,7 +19,6 @@
   "homepage": "https://github.com/5maggieyang5/pokemon_battle#readme",
   "dependencies": {
     "node-fetch": "^2.2.0",
-    "request": "^2.88.0",
-    "request-promise": "^4.2.2"
+    "request": "^2.88.0"
   }
 }
